@@ -71,7 +71,12 @@ class Router{
 							header("Location: index.php?action=admin&name=comments");
 						}elseif ($_GET['option']==1){
 							$this->ctrChapter->removeComment($idComment);
-							header("Location: index.php?action=admin&name=comments");
+							if (isset($_GET['type'])) {
+								header("Location: index.php?action=admin&name=comments&type=all");
+							}else{
+								header("Location: index.php?action=admin&name=comments");
+							}
+							
 						}
 					}
 					
