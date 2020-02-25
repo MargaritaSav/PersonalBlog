@@ -42,9 +42,7 @@
 		<label for="titre-edit">Titre</label>
 		<input type="text" name="titre" id="titre-edit" value="<?=$title?>" required>
     	<textarea id="mytextarea" name="content" required>
-    		<?= $content;
-    			
-    		?>	  
+    		<?= $content; ?>	  
     	</textarea>
     	<label for="datetime">Date de publication</label>
     	<input type="datetime-local" name="publish_time" value="<?=$date?>" id="datetime" required></br>
