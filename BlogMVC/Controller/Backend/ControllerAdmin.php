@@ -33,7 +33,8 @@ class ControllerAdmin{
 		if (isset($_GET["name"])&&$_GET["name"]=="comments") {
 			$view = new View('AdminComments');
 			$comments = $this->comment->getAllComments();
-			$view-> generate(array('comments' => $comments));
+			$numberOfSignaledComments = $this->comment->getNumberOfSignaledComments();
+			$view-> generate(array('comments' => $comments, "numberOfSignaledComments" => $numberOfSignaledComments));
 		} else{
 			$totalNumberOfChapters=$this->chapter->getNumberOfChapters();
 			$view = new View('Admin');
