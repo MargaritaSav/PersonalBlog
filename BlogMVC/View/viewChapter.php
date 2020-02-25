@@ -8,7 +8,6 @@
   	<div class="info col-4">
   		<time><?= $chapter['date'] ?></time>
   	</div>
-
   </header>
   <p><?= $chapter['content'] ?></p>
 </article>
@@ -30,7 +29,7 @@ foreach ($comments as $comment):
 		$class_com = "comment";
 		$text = "Signaler";
 		$class_link="";
-}; ?>
+  }; ?>
   <div class="<?= $class_com?> ">
   	<header class="row">
       <div class="col-6">
@@ -44,7 +43,7 @@ foreach ($comments as $comment):
       <p ><?= $comment['content'] ?></p>
     </div>
   	
-  	<footer>
+  	<footer class="comment-footer">
   		<a href="<?= "index.php?action=report&amp;id_chapter=" . $chapter['id'] . "&amp;id_com=" . $comment['id']?>" class="<?= $class_link?>"><?=$text?></a>
   	</footer>
   </div>
