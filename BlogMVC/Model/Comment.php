@@ -36,6 +36,12 @@ class Comment extends Model {
 		$this->executeRequest($sql, array($this->sanitize($idComment)));
 	}
 
+	public function getNumberOfSignaledComments(){
+		$sql = 'SELECT * FROM comments WHERE signaled=1';
+		$result = $this->executeRequest($sql);
+		return $result->rowCount();
+	}
+
 	public function isCommentSent($uniqid){
 		$sql = 'SELECT * FROM comments WHERE uniqid = ?';
 		$result = $this->executeRequest($sql, array($this->sanitize($uniqid)));
