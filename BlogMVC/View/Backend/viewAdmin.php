@@ -10,32 +10,6 @@
             </div>
         </nav>
 
-      <?php if (isset($_GET["name"])&&$_GET["name"]=="haha") :
-       ?>
-
-       <div id="comments" class="col-lg-8 col-12">
-         <?php foreach ($comments as $comment):
-            ?>
-           <div class="comment-signaled container">
-              <header class="row">
-                <div class="title col-8">
-                  <p class="comment_author"><strong><?= $comment['author'] ?></strong> pour <?=$comment['chapter_title']?></p>
-                </div>
-                <div class="info col-4">
-                  <time><?= $comment['date'] ?></time>
-                </div>
-              </header>
-              <div class="comment-content col-12"><p><?= $comment['content']?></p></div>   
-              <footer>
-                <a role="button" class="btn btn-success" href="<?="index.php?action=delete&amp;option=0&amp;id=" . $comment['id']?>">Enlever le signalement</a>
-                <a role="button" class="btn btn-danger" href="<?="index.php?action=delete&amp;option=1&amp;id=" . $comment['id']?>">Supprimer</a>
-              </footer>
-           </div>
-            
-          <?php endforeach; ?>
-       </div>
-
-      <?php else : ?>
          <div id="chapters" class="col-lg-8 col-12">
             <?php foreach ($chapters as $chapter):
             ?>   
@@ -54,7 +28,7 @@
                     
                     <footer>
                       <div id="edit-buttons">
-                        <a href="<?= "index.php?action=edit&amp;name=modify&amp;id=" . $chapter['id'] ?>" id="modify" role="button" class="btn btn-outline-warning">Modifier</a>
+                        <a href="<?= "index.php?action=edit&amp;name=modify&amp;id=" . $chapter['id'] ?>" id="modify" role="button" class="btn btn-warning">Modifier</a>
                         <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delete-confirmation" data-id = "<?=$chapter['id'] ?>">
                         Supprimer
                         </button>
@@ -84,7 +58,6 @@
             <?php endforeach; ?>
         </div>
 
-      <?php endif; ?>
        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
