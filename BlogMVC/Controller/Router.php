@@ -42,10 +42,11 @@ class Router{
 					$this->ctrChapter->reportComment($idComment, $idChapter);
 
 				} elseif($_GET['action']=="admin_login"){
+					session_start();
 					require_once 'View/Backend/viewAuthorization.php';
 					if (isset($_GET['session']) && $_GET['session']==0) {
 						$this->ctrAdmin->disconnectAdmin();
-					}
+					} 
 
 				} elseif ($_GET['action']=='admin') {
 					session_start();
@@ -59,48 +60,52 @@ class Router{
 					require_once 'View/Backend/viewAuthorization.php';
 
 				} elseif($_GET['action']=='delete'){
-					if (isset($_GET["chapter_id"])) {
-						session_start();
-						$idChapter = intval($_GET["chapter_id"]);
-						$this->ctrChapter->removeChapter($idChapter);
-						header("Location: index.php?action=admin");
-					} elseif (isset($_GET['option'])) {
-						$idComment = intval($this->getParameter($_GET, 'id')) ;
-						 if($_GET['option']==0){
-							$this->ctrChapter->unreportComment($idComment);
-							header("Location: index.php?action=admin&name=comments");
-						}elseif ($_GET['option']==1){
-							$this->ctrChapter->removeComment($idComment);
-							if (isset($_GET['type'])) {
-								header("Location: index.php?action=admin&name=comments&type=all");
-							}else{
+					session_start();
+					if ($this->sessionExists()){
+						if (isset($_GET["chapter_id"])) {
+							session_start();
+							$idChapter = intval($_GET["chapter_id"]);
+							$this->ctrChapter->removeChapter($idChapter);
+							header("Location: index.php?action=admin");
+						} elseif (isset($_GET['option'])) {
+							$idComment = intval($this->getParameter($_GET, 'id')) ;
+							 if($_GET['option']==0){
+								$this->ctrChapter->unreportComment($idComment);
 								header("Location: index.php?action=admin&name=comments");
+							}elseif ($_GET['option']==1){
+								$this->ctrChapter->removeComment($idComment);
+								if (isset($_GET['type'])) {
+									header("Location: index.php?action=admin&name=comments&type=all");
+								}else{
+									header("Location: index.php?action=admin&name=comments");
+								}	
 							}
-							
 						}
-					}
+					} else require_once 'View/Backend/viewAuthorization.php';
 					
 				} elseif ($_GET['action']=='edit') {
-					if (isset($_GET['name'])) {
-						if ($_GET['name']=="modify" && !isset($_GET['option'])) {
-							$idChapter = intval($this->getParameter($_GET,'id'));
-							$this->ctrChapter->getEditPage($idChapter);
-						}elseif($_GET['name']=="create" && !isset($_GET['option'])){
-							$this->ctrChapter->getEditPage();
-						}
-						if (isset($_GET['option'])) {
-							$date = $this->getParameter($_POST, 'publish_time');
-							$title = $this->getParameter($_POST, 'titre');
-							$content = $this->getParameter($_POST, 'content');
-							$idChapter = $this->getParameter($_POST, 'id');
+					if ($this->sessionExists()) {
+						if (isset($_GET['name'])) {
+							if ($_GET['name']=="modify" && !isset($_GET['option'])) {
+								$idChapter = intval($this->getParameter($_GET,'id'));
+								$this->ctrChapter->getEditPage($idChapter);
+							}elseif($_GET['name']=="create" && !isset($_GET['option'])){
+								$this->ctrChapter->getEditPage();
+							}
+							if (isset($_GET['option'])) {
+								$date = $this->getParameter($_POST, 'publish_time');
+								$title = $this->getParameter($_POST, 'titre');
+								$content = $this->getParameter($_POST, 'content');
+								$idChapter = $this->getParameter($_POST, 'id');
 
-							if($_GET['option']==0){
-								$this->ctrChapter->saveChapter($date, $title, $content);
-							}elseif ($_GET['option']==1){
-								$this->ctrChapter->modifyChapter($date, $title, $content, $idChapter);
-							}	
+								if($_GET['option']==0){
+									$this->ctrChapter->saveChapter($date, $title, $content);
+								}elseif ($_GET['option']==1){
+									$this->ctrChapter->modifyChapter($date, $title, $content, $idChapter);
+								}	
+							}
 						}
-					}			
+					} else require_once 'View/Backend/viewAuthorization.php';			
 				} 
 			else{
 				throw new Exception("Action non valide");
@@ -116,6 +121,11 @@ class Router{
 	private function error($errorMsg) {
     $view = new View("Error");
     $view->generate(array('errorMsg' => $errorMsg));
+  	}
+
+  	private function sessionExists(){
+  		session_start();
+		return isset($_SESSION['id']) && isset($_SESSION['login']);
   	}
 
   	private function getParameter($array, $name) {
