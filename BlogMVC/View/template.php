@@ -19,7 +19,7 @@
             </div>
             <div class="col-lg-8 col-12">
               <ul class="row">
-                <li class="col"><a href="index.php" >Acceuil</a></li>
+                <li class="col"><a href="index.php" >Accueil</a></li>
                 <li class="col"><a href="">A propos de l'auteur</a></li>
                 <li class="col"><a href="">Decouvrir plus</a></li>
               </ul>

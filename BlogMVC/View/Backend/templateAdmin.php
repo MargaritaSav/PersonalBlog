@@ -17,7 +17,7 @@
           </div>   
           <div class="col-lg-8 col-12">
             <ul class="row">
-              <li class="col"><a href="index.php?action=admin">Acceuil-Admin</a></li>
+              <li class="col"><a href="index.php?action=admin">Accueil-Admin</a></li>
               <li class="col"><a href="index.php" target="_blank">Aller sur le site</a></li>
               <li class="col"><a href="index.php?action=admin_login&amp;session=0">Déconnecter</a></li>
             </ul>

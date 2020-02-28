@@ -1,4 +1,4 @@
-
+<?php $this->title = "JF-Admin"; ?>
   <div class="container">
       <div class="row">
         <nav class="col-lg-4">
@@ -6,7 +6,7 @@
             <div id="admin-buttons" class="row justify-content-around">
               <div class="col-12 admin-button-block"> <a class="btn btn-dark admin-button" href="<?="index.php?action=admin&amp;name=comments"?>" role="button">Commentaires signalés (<?=$numberOfSignaledComments?>)</a> </div>
               <div class="col-12 admin-button-block"><a href="<?="index.php?action=admin&amp;name=comments&amp;type=all"?>" class="btn btn-light admin-button">Autres commentaires</a></div>
-              <div class="col-12 admin-button-block"><a href="<?="index.php?action=admin"?>" class="btn btn-info admin-button"><-Retour à l'acceuil</a></div>
+              <div class="col-12 admin-button-block"><a href="<?="index.php?action=admin"?>" class="btn btn-info admin-button"><-Retour à l'accueil</a></div>
             </div>
         </nav>
        
